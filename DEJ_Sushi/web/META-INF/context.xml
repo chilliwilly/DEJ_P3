@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/DEJ_Sushi"/>
+<Context antiJARLocking="true" path="/DEJ_Sushi">
+    <Resource 
+        name="jdbc/curso" 
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="20" 
+        maxIdle="10" 
+        maxWait="5"
+        username="root" 
+        password=""
+        url="jdbc:mysql://localhost:3306/curso?zeroDateTimeBehavior=convertToNull"
+        driverClassName="com.mysql.jdbc.Driver" 
+    />
+</Context>
