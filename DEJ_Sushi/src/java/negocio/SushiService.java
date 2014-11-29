@@ -5,10 +5,27 @@
  */
 package negocio;
 
+import dao.*;
+import estructura.*;
+import java.sql.*;
+import java.util.*;
+
 /**
  *
  * @author VSPC
  */
 public class SushiService {
+    private Connection cnx;
     
+    public SushiService(Connection cnx)
+    {
+        this.cnx = cnx;
+    }
+    
+    public ArrayList<Producto> getProducto()
+    {
+        PedidoDAO dao = new PedidoDAO(cnx);
+        
+        return dao.listaProducto();
+    }
 }
