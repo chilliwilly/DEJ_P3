@@ -40,6 +40,6 @@ public class PedidoServlet extends HttpServlet {
         
         //hacer pedido
         
-        request.getRequestDispatcher("/pedido.jsp").forward(request, response);
+        request.getRequestDispatcher("/confirmar.jsp").forward(request, response);
     }
 }
