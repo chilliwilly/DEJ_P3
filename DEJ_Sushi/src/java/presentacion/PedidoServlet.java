@@ -1,5 +1,6 @@
 package presentacion;
 
+import estructura.Pedido;
 import negocio.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,7 +40,37 @@ public class PedidoServlet extends HttpServlet {
             throws ServletException, IOException {
         
         //hacer pedido
-        
-        request.getRequestDispatcher("/confirmar.jsp").forward(request, response);
+        try (Connection cnx = ds.getConnection()){   
+            SushiService ss = new SushiService(cnx);        
+            String nombre = request.getParameter("txtNombre");
+            String direccion = request.getParameter("txtDireccion");
+            String[] arrCod = request.getParameterValues("chkProd");
+            Pedido pedido = new Pedido();
+            ArrayList<Integer> lsDP = new ArrayList<Integer>();
+            
+            if(arrCod != null)
+            {
+                for(String cod : arrCod)
+                {
+                    lsDP.add(Integer.parseInt(cod));
+                }
+                
+                pedido.setNombre(nombre);
+                pedido.setDireccion(direccion);
+                pedido.setLsprod(lsDP);
+                
+                ss.guardaPedido(pedido);
+                
+                request.getRequestDispatcher("/confirmar.jsp").forward(request, response);
+            }
+            else
+            {
+                request.setAttribute("lista",ss.getProducto());
+                request.setAttribute("mensaje", "Debe seleccionar al menos un roll");
+                request.getRequestDispatcher("/pedido.jsp").forward(request, response);
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("Error Get", ex);
+        }
     }
 }

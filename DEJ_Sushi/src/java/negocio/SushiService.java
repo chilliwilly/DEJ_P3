@@ -28,4 +28,15 @@ public class SushiService {
         
         return dao.listaProducto();
     }
+    
+    public void guardaPedido(Pedido pedido)    
+    {
+        PedidoDAO dao = new PedidoDAO(cnx);
+        int cod_ped = dao.insertPedido(pedido.getNombre(), pedido.getDireccion());
+        
+        for(Integer cod_prod: pedido.getLsprod())
+        {
+            dao.insertDetallePedido(cod_ped, cod_prod);
+        }
+    }
 }

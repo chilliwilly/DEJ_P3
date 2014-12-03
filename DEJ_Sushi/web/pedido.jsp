@@ -25,12 +25,13 @@
                     <tr>
                         <td>Dirección</td>
                         <td>:</td>
-                        <td><input type="text" name="txtNombre" required="true"/></td>
+                        <td><input type="text" name="txtDireccion" required="true"/></td>
                     </tr>
                 </table>
             </fieldset>  
             <br>
             <fieldset>
+                <c:out value="${mensaje}"/>
                 <legend>
                     Selección de Rolls
                 </legend>
@@ -40,7 +41,7 @@
                             <c:forEach var="productos" items="${lista}">
                                 <tr>
                                     <td>
-                                        <input type="checkbox" value="<c:out value="${productos.id_producto}"/>"/>
+                                        <input type="checkbox" name="chkProd" value="<c:out value="${productos.id_producto}"/>"/>
                                     </td>
                                     <td>
                                         <c:out value="${productos.nombre_producto}"/>

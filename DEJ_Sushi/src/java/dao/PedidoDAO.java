@@ -45,4 +45,46 @@ public class PedidoDAO {
             throw new RuntimeException("Error al Buscar Producto", ex);
         }
     }
+    
+    public int insertPedido(String nom, String dir)
+    {
+        ResultSet rs = null;
+        int cod_pedido = 0;
+        String sql = "INSERT INTO PEDIDO VALUES (NULL,?,?,?,?);";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setString(1, nom);
+            stmt.setString(2, dir);
+            stmt.setInt(3, 0);
+            stmt.setString(4, "COTIZACION");
+            stmt.executeUpdate();
+            
+            rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+
+            if (rs.next()) {
+                cod_pedido = rs.getInt(1);
+            }
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Insertar ", ex);
+        }
+        
+        return cod_pedido;
+    }
+    
+    public void insertDetallePedido(int cod_ped, int cod_prod)
+    {        
+        String sql = "INSERT INTO PEDIDO_DETALLE VALUES (?,?);";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setInt(1, cod_ped);
+            stmt.setInt(2, cod_prod);
+            stmt.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Insertar Detalle ", ex);
+        }
+    }
 }
