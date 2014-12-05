@@ -11,6 +11,7 @@
         <%@include file="WEB-INF/menu.jspf" %>
         <h1>Pedidos para Despachar</h1>
         <form method="post" action="<c:url value="/DespachoServlet"/>">
+            
         </form>
     </body>
 </html>

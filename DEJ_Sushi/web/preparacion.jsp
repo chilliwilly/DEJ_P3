@@ -17,7 +17,12 @@
                         Pedido &nbsp; <c:out value="${pedido.id_pedido}"/>
                     </legend>
                     <table>
-                        <c:forEach var="producto" items="${listaprod}">
+                        <tr>
+                            <td>
+                                Debe ir el listado del pedido 
+                            </td>
+                        </tr>
+                        <!--<c:forEach var="producto" items="${listaprod}">
                             <c:if test="${producto.id_pedido == pedido.id_pedido}">
                                 <tr>
                                     <td>
@@ -28,7 +33,7 @@
                                     </td>
                                 </tr>
                             </c:if>
-                        </c:forEach>                        
+                        </c:forEach>-->                       
                     </table>
                     <br>
                     <input type="button" value="Despachar"/>
