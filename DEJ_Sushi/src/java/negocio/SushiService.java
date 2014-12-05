@@ -110,6 +110,12 @@ public class SushiService {
         return lprod;
     }
     
+    public void modEstadoPedidoDesp(int cod)
+    {
+        CocinaDAO dao = new CocinaDAO(cnx);
+        dao.updateEstadoADespacho(cod);
+    }
+    
     //Despacho
     public ArrayList<Pedido> getListaDespacho()
     {

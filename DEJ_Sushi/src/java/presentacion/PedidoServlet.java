@@ -62,7 +62,10 @@ public class PedidoServlet extends HttpServlet {
                 //nropedido = 
                 ss.guardaPedido(pedido);
                 
-                //request.setAttribute("cod_ped", nropedido);
+                //---------------
+                
+                //---------------
+                
                 String url = request.getContextPath()+"/ConfirmarServlet";
                 response.sendRedirect(url);
                 //request.getRequestDispatcher("/ConfirmarServlet").forward(request, response);

@@ -64,7 +64,7 @@
                                             <button type="button" class="btn btn-default btn-xs">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
-                                        </a>
+                                        </a>                                   
                                     </td> 
                                 </tr>
                             </c:forEach>   

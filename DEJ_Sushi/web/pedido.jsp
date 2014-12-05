@@ -21,19 +21,22 @@
                     <tr>
                         <td>Nombre</td>
                         <td>:</td>
-                        <td><input type="text" name="txtNombre" required="true"/></td>
+                        <td><input type="text" name="txtNombre" required="true" placeholder="Ingrese Nombre"/></td>
                     </tr>
                     <tr><td colspan="3">&nbsp;</td></tr>
                     <tr>
                         <td>Dirección</td>
                         <td>:</td>
-                        <td><input type="text" name="txtDireccion" required="true"/></td>
+                        <td><input type="text" name="txtDireccion" required="true" placeholder="Ingrese Direccion"/></td>
                     </tr>
                 </table>                
             </fieldset>  
             <br>
-            <fieldset>
+            <h2>
                 <c:out value="${mensaje}"/>
+            </h2>
+            <br>
+            <fieldset>
                 <legend>
                     Selección de Rolls
                 </legend>

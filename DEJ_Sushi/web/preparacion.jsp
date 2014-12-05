@@ -10,23 +10,36 @@
     <body>
         <%@include file="WEB-INF/menu.jspf" %>
         <h1>Pedidos Para Preparar</h1>
-        <form action="<c:url value="/CocinaServlet"/>" method="post">
-            <c:forEach var="pedido" items="${listap}">
+        <form action="<c:url value="/CocinaServlet"/>" method="get">
+            <c:forEach var="listaPedido" items="${lista}">
+                <input type="hidden" name="codPedido" value="<c:out value="${listaPedido.pedido.id_pedido}"/>"/>
                 <fieldset>
-                    <legend>
-                        Pedido &nbsp; <c:out value="${pedido.id_pedido}"/>
-                    </legend>
-                    <table>
+                <legend>
+                    Pedido &nbsp; <c:out value="${listaPedido.pedido.id_pedido}"/>
+                </legend>
+                <table>
+                    <c:forEach var="listaProducto" items="${listaPedido.productos}">
                         <tr>
                             <td>
-                                Debe ir el listado del pedido 
+                                <c:out value="${listaProducto.nombre_producto}"/>
                             </td>
-                        </tr>                                              
-                    </table>
-                    <br>
-                    <input type="button" value="Despachar"/>
-                </fieldset>
-                    <br>
+                            <td>&nbsp;</td>
+                            <td>
+                                <c:out value="${listaProducto.descrip_producto}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>                    
+                </table>
+                <br>
+                    <c:url var="despachar" value="/CocinadoServlet">
+                        <c:param name="codped" value="${listaPedido.pedido.id_pedido}"/>
+                    </c:url>
+                    <a href="${despachar}">
+                        <button type="button" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </a> 
+                <br><br>
             </c:forEach>            
         </form>
     </body>

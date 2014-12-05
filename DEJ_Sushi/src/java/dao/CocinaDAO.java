@@ -66,4 +66,20 @@ public class CocinaDAO {
         }
         return lprod;
     }
+    
+    public void updateEstadoADespacho(int codPedido)
+    {
+        String estado = "DESPACHO";
+        String sql = "UPDATE PEDIDO SET ESTADO = ? WHERE ID_PEDIDO = ?;";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setString(1, estado);
+            stmt.setInt(2, codPedido);
+            stmt.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Update ", ex);
+        }
+    }
 }
