@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import estructura.*;
 import java.sql.*;
 import java.util.*;
 
-/**
- *
- * @author VSPC
- */
 public class PedidoDAO {
     private Connection cnx;
 
@@ -48,8 +39,6 @@ public class PedidoDAO {
     
     public void insertPedido(String nom, String dir, int tot)
     {
-        //ResultSet rs = null;
-        //int cod_pedido = 0;
         String sql = "INSERT INTO PEDIDO VALUES (NULL,?,?,?,?);";
         try(PreparedStatement stmt = cnx.prepareStatement(sql))
         {
@@ -58,19 +47,11 @@ public class PedidoDAO {
             stmt.setInt(3, tot);
             stmt.setString(4, "COTIZACION");
             stmt.executeUpdate();
-            
-            //rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
-
-            //if (rs.next()) {
-            //    cod_pedido = rs.getInt(1);
-            //}
         }
         catch(Exception ex)
         {
             throw new RuntimeException("Error al Insertar ", ex);
         }
-        
-        //return cod_pedido;
     }
     
     public int selectLastId()

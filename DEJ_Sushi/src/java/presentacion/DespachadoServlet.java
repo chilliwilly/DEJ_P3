@@ -26,7 +26,7 @@ public class DespachadoServlet extends HttpServlet {
         try (Connection cnx = ds.getConnection()){   
             SushiService ss = new SushiService(cnx);
             ss.modListaDespacho(cod);
-            //request.getRequestDispatcher("/despacho.jsp").forward(request, response);
+            
             Thread.sleep(2000);
             String url = request.getContextPath()+"/DespachoServlet";
                 response.sendRedirect(url);

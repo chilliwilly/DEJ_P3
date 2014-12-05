@@ -27,22 +27,11 @@ public class CocinaServlet extends HttpServlet {
             SushiService ss = new SushiService(cnx);
             
             ArrayList<Pedido> ls = ss.getListaPedidoCocina();
-            //ArrayList<Producto> lprod = ss.getListaProdCocina();
             ArrayList<Producto> lsProducto = new ArrayList<Producto>();
             ArrayList<PedidoProducto> lsPedProd = new ArrayList<PedidoProducto>();
 
             for(Pedido ped : ls)
             {
-//                for(Producto producto : lprod)
-//                {
-//                    if(producto.getId_pedido() == ped.getId_pedido())
-//                    {
-//                        Producto prod = new Producto();
-//                        prod.setNombre_producto(producto.getNombre_producto());
-//                        prod.setDescrip_producto(producto.getDescrip_producto());
-//                        lsProducto.add(prod);
-//                    }
-//                }
                 lsProducto = ss.getPedidoDetalle(ped.getId_pedido());
                 PedidoProducto pp = new PedidoProducto(ped, lsProducto);
                 lsPedProd.add(pp);

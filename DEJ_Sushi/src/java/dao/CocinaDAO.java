@@ -17,7 +17,6 @@ public class CocinaDAO {
     {
         ArrayList<Pedido> ls = new ArrayList<Pedido>();
         String estado = "PREPARACION";
-        //ResultSet rs = null;
         String sql = "SELECT * FROM PEDIDO WHERE ESTADO = ? ORDER BY ID_PEDIDO;";
         try(PreparedStatement stmt = cnx.prepareStatement(sql))
         {

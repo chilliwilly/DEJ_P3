@@ -58,17 +58,11 @@ public class PedidoServlet extends HttpServlet {
                 pedido.setNombre(nombre);
                 pedido.setDireccion(direccion);
                 pedido.setLsprod(lsDP);
-                
-                //nropedido = 
-                ss.guardaPedido(pedido);
-                
-                //---------------
-                
-                //---------------
+
+                ss.guardaPedido(pedido);                
                 
                 String url = request.getContextPath()+"/ConfirmarServlet";
                 response.sendRedirect(url);
-                //request.getRequestDispatcher("/ConfirmarServlet").forward(request, response);
             }
             else
             {
