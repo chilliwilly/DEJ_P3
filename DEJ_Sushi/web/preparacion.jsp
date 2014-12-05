@@ -21,19 +21,7 @@
                             <td>
                                 Debe ir el listado del pedido 
                             </td>
-                        </tr>
-                        <!--<c:forEach var="producto" items="${listaprod}">
-                            <c:if test="${producto.id_pedido == pedido.id_pedido}">
-                                <tr>
-                                    <td>
-                                        <c:out value="${producto.nombre}"/>
-                                    </td>
-                                    <td>
-                                        <c:out value="${producto.descripcion}"/>
-                                    </td>
-                                </tr>
-                            </c:if>
-                        </c:forEach>-->                       
+                        </tr>                                              
                     </table>
                     <br>
                     <input type="button" value="Despachar"/>

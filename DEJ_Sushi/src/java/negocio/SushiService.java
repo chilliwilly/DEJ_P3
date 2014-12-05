@@ -21,7 +21,7 @@ public class SushiService {
     {
         this.cnx = cnx;
     }
-    
+    //Creacion Eliminacion Pedido - Detalle
     public ArrayList<Producto> getProducto()
     {
         PedidoDAO dao = new PedidoDAO(cnx);
@@ -83,8 +83,17 @@ public class SushiService {
     public void borrarItemPedido(int codPedido, int codProd)
     {
         PedidoDAO dao = new PedidoDAO(cnx);
+        dao.deleteItemPedido(codPedido, codProd);
+        dao.updateItemPedidoPrecio(codPedido);
     }
     
+    public void confirmarPedido(int cod)
+    {
+        PedidoDAO dao = new PedidoDAO(cnx);
+        dao.updateEstadoPedido(cod);
+    }
+    
+    //Preparar
     public ArrayList<Pedido> getListaPedidoCocina()
     {
         ArrayList<Pedido> ls = new ArrayList<Pedido>();
@@ -101,9 +110,18 @@ public class SushiService {
         return lprod;
     }
     
-    public void confirmarPedido(int cod)
+    //Despacho
+    public ArrayList<Pedido> getListaDespacho()
     {
-        PedidoDAO dao = new PedidoDAO(cnx);
-        dao.updateEstadoPedido(cod);
+        DespachoDAO dao = new DespachoDAO(cnx);
+        ArrayList<Pedido> ls = new ArrayList<Pedido>();
+        ls = dao.getPedidoDespacho();
+        return ls;
+    }
+    
+    public void modListaDespacho(int cod)
+    {
+        DespachoDAO dao = new DespachoDAO(cnx);
+        dao.updatePedidoDespacho(cod);
     }
 }

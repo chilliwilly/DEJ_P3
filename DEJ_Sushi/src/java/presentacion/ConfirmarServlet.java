@@ -29,7 +29,6 @@ public class ConfirmarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //int cod_pedido = Integer.parseInt(request.getAttribute("cod_ped").toString());
         try (Connection cnx = ds.getConnection()){   
             SushiService ss = new SushiService(cnx);           
             int cod_pedido = ss.getUltimoId();
@@ -55,7 +54,7 @@ public class ConfirmarServlet extends HttpServlet {
             
             ss.confirmarPedido(codPedido);            
 
-            String url = request.getContextPath()+"/ConfirmarServlet";
+            String url = request.getContextPath()+"/PedidoServlet";
             response.sendRedirect(url);
         } catch (Exception ex) {
             throw new RuntimeException("Error Post", ex);

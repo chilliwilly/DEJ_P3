@@ -110,7 +110,7 @@ public class PedidoDAO {
     
     public void deleteItemPedido(int codPedido, int codProd)
     {
-        String sql = "DELETE FROM PEDIDO_DETALLE WHERE ID_PEDIDO = ? AND ID_PRODDUCTO = ?;";
+        String sql = "DELETE FROM PEDIDO_DETALLE WHERE ID_PEDIDO = ? AND ID_PRODUCTO = ?;";
         try(PreparedStatement stmt = cnx.prepareStatement(sql))
         {
             stmt.setInt(1, codPedido);
@@ -120,6 +120,23 @@ public class PedidoDAO {
         catch(Exception ex)
         {
             throw new RuntimeException("Error al Borrar Detalle ", ex);
+        }
+    }
+    
+    public void updateItemPedidoPrecio(int codPedido)
+    {
+        String sql = "UPDATE PEDIDO SET TOTAL = "
+                   + "(SELECT SUM(PRECIO) FROM PRODUCTO JOIN PEDIDO_DETALLE USING (ID_PRODUCTO) WHERE ID_PEDIDO = ?) "
+                   + "WHERE ID_PEDIDO = ?;";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setInt(1, codPedido);
+            stmt.setInt(2, codPedido);
+            stmt.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Updatear ", ex);
         }
     }
     

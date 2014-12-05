@@ -46,8 +46,24 @@ public class DespachoDAO {
         }
         catch(Exception ex)
         {
-            throw new RuntimeException("Error al Borrar Detalle ", ex);
+            throw new RuntimeException("Error al Seleccionar ", ex);
         }
         return lspedido;
+    }
+    
+    public void updatePedidoDespacho(int cod_pedido)
+    {
+        String estado = "FINALIZADO";
+        String sql = "UPDATE PEDIDO SET ESTADO = ? WHERE ID_PEDIDO = ?;";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setString(1, estado);
+            stmt.setInt(2, cod_pedido);
+            stmt.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Hacer Update ", ex);
+        }
     }
 }

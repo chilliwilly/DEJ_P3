@@ -21,13 +21,13 @@
                 <table>
                     <tr>
                         <td>Nombre</td>
-                        <td>:</td>
+                        <td>:&nbsp;</td>
                         <td><c:out value="${itemPedido.nombre}"/></td>
                     </tr>
                     <tr><td colspan="3">&nbsp;</td></tr>
                     <tr>
                         <td>Dirección</td>
-                        <td>:</td>
+                        <td>:&nbsp;</td>
                         <td><c:out value="${itemPedido.direccion}"/></td>
                     </tr>
                 </table>
@@ -56,8 +56,9 @@
                                         <c:out value="${productos.precio_producto}"/>
                                     </td>
                                     <td>
-                                        <c:url var="borraItemPedido" value="/ConfirmarServlet">
-                                            <c:param name="codProd" value="${productos.id_producto}"/>
+                                        <c:url var="borraItemPedido" value="/ConfirmaServlet">
+                                            <c:param name="codPedi" value="${itemPedido.id_pedido}"/>
+                                            <c:param name="codProd" value="${productos.id_producto}"/>                                            
                                         </c:url>
                                         <a href="${borraItemPedido}">
                                             <button type="button" class="btn btn-default btn-xs">

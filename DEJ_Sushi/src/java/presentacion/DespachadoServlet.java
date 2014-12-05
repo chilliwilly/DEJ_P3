@@ -1,6 +1,5 @@
 package presentacion;
 
-import estructura.Pedido;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -14,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import negocio.SushiService;
 
-@WebServlet(name = "DespachoServlet", urlPatterns = {"/DespachoServlet"})
-public class DespachoServlet extends HttpServlet {
+@WebServlet(name = "DespachadoServlet", urlPatterns = {"/DespachadoServlet"})
+public class DespachadoServlet extends HttpServlet {
 
     @Resource(name = "jdbc/curso")
     private DataSource ds;
@@ -23,11 +22,14 @@ public class DespachoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int cod = Integer.parseInt(request.getParameter("codped"));
         try (Connection cnx = ds.getConnection()){   
             SushiService ss = new SushiService(cnx);
-            ArrayList<Pedido> ls = ss.getListaDespacho();
-            request.setAttribute("lsdespacho", ls);
-            request.getRequestDispatcher("/despacho.jsp").forward(request, response);
+            ss.modListaDespacho(cod);
+            //request.getRequestDispatcher("/despacho.jsp").forward(request, response);
+            Thread.sleep(2000);
+            String url = request.getContextPath()+"/DespachoServlet";
+                response.sendRedirect(url);
         } catch (Exception ex) {
             throw new RuntimeException("Error Get", ex);
         }

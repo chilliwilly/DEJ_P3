@@ -1,10 +1,8 @@
 package presentacion;
 
-import estructura.Pedido;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.ArrayList;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,20 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import negocio.SushiService;
 
-@WebServlet(name = "DespachoServlet", urlPatterns = {"/DespachoServlet"})
-public class DespachoServlet extends HttpServlet {
+@WebServlet(name = "ConfirmaServlet", urlPatterns = {"/ConfirmaServlet"})
+public class ConfirmaServlet extends HttpServlet {
 
     @Resource(name = "jdbc/curso")
     private DataSource ds;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int cpedi = Integer.parseInt(request.getParameter("codPedi"));
+        int cprod = Integer.parseInt(request.getParameter("codProd"));
+        
         try (Connection cnx = ds.getConnection()){   
             SushiService ss = new SushiService(cnx);
-            ArrayList<Pedido> ls = ss.getListaDespacho();
-            request.setAttribute("lsdespacho", ls);
-            request.getRequestDispatcher("/despacho.jsp").forward(request, response);
+            
+            ss.borrarItemPedido(cpedi, cprod);            
+            
+            Thread.sleep(2000);
+            String url = request.getContextPath()+"/ConfirmarServlet";
+            response.sendRedirect(url);
         } catch (Exception ex) {
             throw new RuntimeException("Error Get", ex);
         }
