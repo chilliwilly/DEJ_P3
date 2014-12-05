@@ -46,20 +46,41 @@ public class PedidoDAO {
         }
     }
     
-    public int insertPedido(String nom, String dir)
+    public void insertPedido(String nom, String dir, int tot)
     {
-        ResultSet rs = null;
-        int cod_pedido = 0;
+        //ResultSet rs = null;
+        //int cod_pedido = 0;
         String sql = "INSERT INTO PEDIDO VALUES (NULL,?,?,?,?);";
         try(PreparedStatement stmt = cnx.prepareStatement(sql))
         {
             stmt.setString(1, nom);
             stmt.setString(2, dir);
-            stmt.setInt(3, 0);
+            stmt.setInt(3, tot);
             stmt.setString(4, "COTIZACION");
             stmt.executeUpdate();
             
-            rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+            //rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+
+            //if (rs.next()) {
+            //    cod_pedido = rs.getInt(1);
+            //}
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Insertar ", ex);
+        }
+        
+        //return cod_pedido;
+    }
+    
+    public int selectLastId()
+    {
+        ResultSet rs = null;
+        int cod_pedido = 0;
+        String sql = "SELECT LAST_INSERT_ID()";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            rs = stmt.executeQuery();
 
             if (rs.next()) {
                 cod_pedido = rs.getInt(1);
@@ -67,9 +88,8 @@ public class PedidoDAO {
         }
         catch(Exception ex)
         {
-            throw new RuntimeException("Error al Insertar ", ex);
+            throw new RuntimeException("Error al Recuperar ID ", ex);
         }
-        
         return cod_pedido;
     }
     
@@ -85,6 +105,88 @@ public class PedidoDAO {
         catch(Exception ex)
         {
             throw new RuntimeException("Error al Insertar Detalle ", ex);
+        }
+    }
+    
+    public void deleteItemPedido(int codPedido, int codProd)
+    {
+        String sql = "DELETE FROM PEDIDO_DETALLE WHERE ID_PEDIDO = ? AND ID_PRODDUCTO = ?;";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setInt(1, codPedido);
+            stmt.setInt(2, codProd);
+            stmt.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Borrar Detalle ", ex);
+        }
+    }
+    
+    public Pedido selectPedido(int codPedido)
+    {        
+        Pedido p = null;
+        String sql = "SELECT ID_PEDIDO, NOMBRE, DIRECCION, TOTAL FROM PEDIDO WHERE ID_PEDIDO = ?;";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setInt(1, codPedido);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next())
+            {
+                p = new Pedido(rs.getInt("ID_PEDIDO"), 
+                               rs.getString("NOMBRE"), 
+                               rs.getString("DIRECCION"), 
+                               rs.getInt("TOTAL"));             
+            }
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Borrar Detalle ", ex);
+        }
+        return p;
+    }
+    
+    public ArrayList<Producto> selectDetallePedido(int codPedido)
+    {
+        ArrayList<Producto> lsprod = new ArrayList<Producto>();
+        String sql = "SELECT ID_PRODUCTO, NOMBRE, DESCRIPCION, PRECIO "
+                   + "FROM PRODUCTO JOIN PEDIDO_DETALLE USING (ID_PRODUCTO) "
+                   + "WHERE ID_PEDIDO = ? ORDER BY ID_PRODUCTO;";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setInt(1, codPedido);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next())
+            {
+                Producto prod = new Producto();
+                prod.setId_producto(rs.getInt("ID_PRODUCTO"));
+                prod.setNombre_producto(rs.getString("NOMBRE"));
+                prod.setDescrip_producto(rs.getString("DESCRIPCION"));
+                prod.setPrecio_producto(rs.getInt("PRECIO"));
+                lsprod.add(prod);                            
+            }
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Borrar Detalle ", ex);
+        }
+        return lsprod;
+    }
+    
+    public void updateEstadoPedido(int cod)
+    {
+        String sql = "UPDATE PEDIDO SET ESTADO = ? WHERE ID_PEDIDO = ?;";
+        try(PreparedStatement stmt = cnx.prepareStatement(sql))
+        {
+            stmt.setString(1, "PREPARACION");
+            stmt.setInt(2, cod);
+            stmt.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException("Error al Actualizar Estado ", ex);
         }
     }
 }

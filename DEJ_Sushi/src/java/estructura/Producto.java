@@ -10,6 +10,7 @@ package estructura;
  * @author VSPC
  */
 public class Producto {
+    private int id_pedido;
     private int id_producto;
     private String nombre_producto;
     private String descrip_producto;
@@ -23,6 +24,22 @@ public class Producto {
         this.nombre_producto = nombre_producto;
         this.descrip_producto = descrip_producto;
         this.precio_producto = precio_producto;
+    }
+
+    public Producto(int id_pedido, int id_producto, String nombre_producto, String descrip_producto, int precio_producto) {
+        this.id_pedido = id_pedido;
+        this.id_producto = id_producto;
+        this.nombre_producto = nombre_producto;
+        this.descrip_producto = descrip_producto;
+        this.precio_producto = precio_producto;
+    }
+
+    public int getId_pedido() {
+        return id_pedido;
+    }
+
+    public void setId_pedido(int id_pedido) {
+        this.id_pedido = id_pedido;
     }
 
     public int getId_producto() {

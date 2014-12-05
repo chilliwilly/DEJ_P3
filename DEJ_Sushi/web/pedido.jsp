@@ -9,6 +9,8 @@
     </head>
     <body>
         <%@include file="WEB-INF/menu.jspf" %>
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <h1>Pedido Sushi</h1>
         <form action="<c:url value="/PedidoServlet"/>" method="post">
             <fieldset>
@@ -27,7 +29,7 @@
                         <td>:</td>
                         <td><input type="text" name="txtDireccion" required="true"/></td>
                     </tr>
-                </table>
+                </table>                
             </fieldset>  
             <br>
             <fieldset>

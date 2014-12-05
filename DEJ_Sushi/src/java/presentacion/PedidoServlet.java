@@ -1,6 +1,6 @@
 package presentacion;
 
-import estructura.Pedido;
+import estructura.*;
 import negocio.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,21 +47,25 @@ public class PedidoServlet extends HttpServlet {
             String[] arrCod = request.getParameterValues("chkProd");
             Pedido pedido = new Pedido();
             ArrayList<Integer> lsDP = new ArrayList<Integer>();
-            
+            int nropedido = 0;
             if(arrCod != null)
             {
                 for(String cod : arrCod)
                 {
-                    lsDP.add(Integer.parseInt(cod));
+                    lsDP.add(Integer.parseInt(cod));                    
                 }
                 
                 pedido.setNombre(nombre);
                 pedido.setDireccion(direccion);
                 pedido.setLsprod(lsDP);
                 
+                //nropedido = 
                 ss.guardaPedido(pedido);
                 
-                request.getRequestDispatcher("/confirmar.jsp").forward(request, response);
+                //request.setAttribute("cod_ped", nropedido);
+                String url = request.getContextPath()+"/ConfirmarServlet";
+                response.sendRedirect(url);
+                //request.getRequestDispatcher("/ConfirmarServlet").forward(request, response);
             }
             else
             {

@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package estructura;
 
+import java.io.Serializable;
 import java.util.*;
 
-/**
- *
- * @author VSPC
- */
-public class Pedido {
+public class Pedido implements Serializable{
+    private int id_pedido;
     private String nombre;
     private String direccion;
+    private int total;
     private ArrayList<Integer> lsprod;
 
     public Pedido() {
@@ -23,6 +17,21 @@ public class Pedido {
         this.nombre = nombre;
         this.direccion = direccion;
         this.lsprod = lsprod;
+    }
+
+    public Pedido(int id_pedido, String nombre, String direccion, int total) {
+        this.id_pedido = id_pedido;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.total = total;
+    }
+
+    public int getId_pedido() {
+        return id_pedido;
+    }
+
+    public void setId_pedido(int id_pedido) {
+        this.id_pedido = id_pedido;
     }
 
     public String getNombre() {
@@ -47,5 +56,13 @@ public class Pedido {
 
     public void setLsprod(ArrayList<Integer> lsprod) {
         this.lsprod = lsprod;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }
