@@ -15,21 +15,21 @@
                 <div class="col-xs-6 col-lg-offset-1 text-left">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <td>
+                            <th>
                                 Pedido
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 Cliente
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 Direccion
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 Total
-                            </td>
-                            <td>
+                            </th>
+                            <th>
                                 Accion
-                            </td>
+                            </th>
                         </tr>
                         <c:choose>
                             <c:when test="${lsdespacho==null}">

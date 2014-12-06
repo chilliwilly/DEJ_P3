@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            
+            <c:out value="${mensaje}"/>
             <div class="container modal-content">
             <div class="page-header"><h1>Seleccion de Rolls</h1></div>        
             <div class="row">

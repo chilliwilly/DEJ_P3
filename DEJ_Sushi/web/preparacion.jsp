@@ -12,35 +12,40 @@
         <h1>Pedidos Para Preparar</h1>
         <form action="<c:url value="/CocinaServlet"/>" method="get">
             <c:forEach var="listaPedido" items="${lista}">
-                <input type="hidden" name="codPedido" value="<c:out value="${listaPedido.pedido.id_pedido}"/>"/>
-                <fieldset>
-                <legend>
-                    Pedido &nbsp; <c:out value="${listaPedido.pedido.id_pedido}"/>
-                </legend>
-                <table>
-                    <c:forEach var="listaProducto" items="${listaPedido.productos}">
-                        <tr>
-                            <td>
-                                <c:out value="${listaProducto.nombre_producto}"/>
-                            </td>
-                            <td>&nbsp;</td>
-                            <td>
-                                <c:out value="${listaProducto.descrip_producto}"/>
-                            </td>
-                        </tr>
-                    </c:forEach>                    
-                </table>
-                <br>
-                    <c:url var="despachar" value="/CocinadoServlet">
-                        <c:param name="codped" value="${listaPedido.pedido.id_pedido}"/>
-                    </c:url>
-                    <a href="${despachar}">
-                        <button type="button" class="btn btn-primary btn-lg">
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </button>
-                    </a> 
+                <div class="panel panel-primary col-lg-offset-2" style="width: 900px;">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Pedido Nro &nbsp; <c:out value="${listaPedido.pedido.id_pedido}"/></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-7 col-lg-offset-3 text-center">
+                                <table class="table table-striped table-bordered">
+                                    <c:forEach var="listaProducto" items="${listaPedido.productos}">
+                                        <tr>
+                                            <th>
+                                                <c:out value="${listaProducto.nombre_producto}"/>
+                                            </th>
+                                            <th>
+                                                <c:out value="${listaProducto.descrip_producto}"/>
+                                            </th>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                                <br>
+                                    <c:url var="despachar" value="/CocinadoServlet">
+                                        <c:param name="codped" value="${listaPedido.pedido.id_pedido}"/>
+                                    </c:url>
+                                    <a href="${despachar}">
+                                        <button type="button" class="btn btn-primary btn-lg">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                        </button>
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
                 <br><br>
-            </c:forEach>            
+            </c:forEach>
         </form>
     </body>
 </html>
